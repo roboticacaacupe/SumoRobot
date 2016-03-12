@@ -1,0 +1,222 @@
+int valor1 = 0;
+int valor2 = 0;
+int valor3 = 0;
+int valor4 = 0;
+int sensorIRFD = 1;
+int sensorIRFI = 2;
+int sensorIRTD = 3;
+int sensorIRTI = 4;
+int izqA = 5; 
+int izqB = 6; 
+int derA = 9; 
+int derB = 10; 
+int vel = 255; // Velocidad de los motores (0-255)
+int ptrig = 7;
+int pecho = 8;
+int ptrig2 = 11;
+int pecho2 = 12;
+int duracion, distancia;
+int duracion2, distancia2;
+
+
+void setup()  { 
+  pinMode(derA, OUTPUT);
+  pinMode(derB, OUTPUT);
+  pinMode(izqA, OUTPUT);
+  pinMode(izqB, OUTPUT);
+  pinMode(ptrig, OUTPUT);
+  pinMode(pecho, INPUT);
+  pinMode(ptrig2, OUTPUT);
+  pinMode(pecho2, INPUT);
+  pinMode(sensorIRFD, INPUT);
+  pinMode(sensorIRFI, INPUT);
+  pinMode(sensorIRTD, INPUT);
+  pinMode(sensorIRTI, INPUT); 
+}
+ 
+void loop()  { 
+  
+  int buscar();
+       analogWrite(derB, 0);             
+       analogWrite(izqB, 0);
+       analogWrite(derA, 0);  
+       analogWrite(izqA, vel);
+       delay(1000);
+       analogWrite(derB, 0);             
+       analogWrite(izqB, 0);
+       analogWrite(derA, vel);  
+       analogWrite(izqA, vel);
+       delay(300);
+  
+  
+  digitalWrite(ptrig, HIGH);   
+
+     delay(0.01);
+
+     digitalWrite(ptrig, LOW);
+
+     
+
+     duracion = pulseIn(pecho, HIGH);              // Lee el tiempo del Echo
+
+     distancia = (duracion/2) / 29;            // calcula la distancia en centimetros
+
+     delay(10); 
+     
+
+     if (distancia <= 30){    // si la distancia es menor de 30cm
+
+        analogWrite(derB, 0);                  // ATACAR
+        analogWrite(izqB, 0);
+        analogWrite(derA, vel);
+        analogWrite(izqA, vel); 
+
+        delay (200);}
+
+         else{
+       analogWrite(derB, 0);             
+       analogWrite(izqB, 0);
+       analogWrite(derA, 0);  
+       analogWrite(izqA, vel);
+       delay(1000);
+       analogWrite(derB, 0);             
+       analogWrite(izqB, 0);
+       analogWrite(derA, vel);  
+       analogWrite(izqA, vel);
+       delay(300);
+       }
+     
+     digitalWrite(ptrig2, HIGH);   
+
+     delay(0.01);
+
+     digitalWrite(ptrig2, LOW);
+
+     
+
+     duracion2 = pulseIn(pecho2, HIGH);              // Lee el tiempo del Echo
+
+     distancia2 = (duracion2/2) / 29;            // calcula la distancia en centimetros
+
+     delay(10); 
+     
+
+     if (distancia2 <= 30){    // si la distancia es menor de 30cm
+
+        analogWrite(derA, 0);    
+        analogWrite(izqA, 0);
+        analogWrite(derB, vel);  
+        analogWrite(izqB, vel); 
+        delay (100);}
+        
+     else
+         {
+       analogWrite(derB, 0);             
+       analogWrite(izqB, 0);
+       analogWrite(derA, 0);  
+       analogWrite(izqA, vel);
+       delay(1000);
+       analogWrite(derB, 0);             
+       analogWrite(izqB, 0);
+       analogWrite(derA, vel);  
+       analogWrite(izqA, vel);
+       delay(300);
+        }
+
+valor1 = digitalRead(sensorIRFD);
+
+    if(digitalRead(valor1)==HIGH)
+{
+   
+  analogWrite(derA, 0);    
+  analogWrite(izqA, 0);
+  analogWrite(derB, vel);  
+  analogWrite(izqB, vel);
+  delay(1000); 
+     
+}
+  else
+       {
+       analogWrite(derB, 0);             
+       analogWrite(izqB, 0);
+       analogWrite(derA, 0);  
+       analogWrite(izqA, vel);
+       delay(1000);
+       analogWrite(derB, 0);             
+       analogWrite(izqB, 0);
+       analogWrite(derA, vel);  
+       analogWrite(izqA, vel);
+       delay(300);
+        }
+
+valor2 = digitalRead(sensorIRFI);
+
+  if(digitalRead(valor2)==HIGH)
+  {
+  analogWrite(derA, 0);    
+  analogWrite(izqA, 0);
+  analogWrite(derB, vel);  
+  analogWrite(izqB, vel);
+  delay(1000); 
+  }
+  else
+  {
+      analogWrite(derB, 0);             
+       analogWrite(izqB, 0);
+       analogWrite(derA, 0);  
+       analogWrite(izqA, vel);
+       delay(1000);
+       analogWrite(derB, 0);             
+       analogWrite(izqB, 0);
+       analogWrite(derA, vel);  
+       analogWrite(izqA, vel);
+       delay(300);
+  }
+  
+  valor3 = digitalRead(sensorIRTD);
+  
+    if(digitalRead(valor3)==HIGH)
+    {
+        analogWrite(derB, 0);              
+        analogWrite(izqB, 0);
+        analogWrite(derA, vel);
+        analogWrite(izqA, vel); 
+        delay (1000);
+      }  
+        else
+      {
+       analogWrite(derB, 0);             
+       analogWrite(izqB, 0);
+       analogWrite(derA, 0);  
+       analogWrite(izqA, vel);
+       delay(1000);
+       analogWrite(derB, 0);             
+       analogWrite(izqB, 0);
+       analogWrite(derA, vel);  
+       analogWrite(izqA, vel);
+       delay(300);
+      }
+ valor4 = digitalRead(sensorIRTI);
+ 
+  if(digitalRead(valor4)==HIGH)
+  {
+        analogWrite(derB, 0);                  
+        analogWrite(izqB, 0);
+        analogWrite(derA, vel);
+        analogWrite(izqA, vel); 
+        delay (1000);
+      }
+       else
+        {
+       analogWrite(derB, 0);             
+       analogWrite(izqB, 0);
+       analogWrite(derA, 0);  
+       analogWrite(izqA, vel);
+       delay(1000);
+       analogWrite(derB, 0);             
+       analogWrite(izqB, 0);
+       analogWrite(derA, vel);  
+       analogWrite(izqA, vel);
+       delay(300);
+        }
+}
